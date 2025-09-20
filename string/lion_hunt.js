@@ -3,7 +3,7 @@ const testCase2 = "L L";
 const testCase3 = "L  ";
 const testCase4 = "  Z ";
 const testCase5 = "   Z ";
-const testCaseToUse = testCase1;
+const testCaseToUse = testCase5;
 const testCaseLength = testCaseToUse.length;
 let countOfL = 0;
 let countOfZ = 0;
@@ -22,10 +22,7 @@ for(let index = 0; index < testCaseLength; index++) {
 }
 
 let shortestDistance = 0;
-const isNoZ = (countOfL + countOfSpace) === testCaseLength;
-const isNoL = (countOfZ + countOfSpace) === testCaseLength;
-
-if(isNoZ || isNoL) {
+if(!countOfL || !countOfZ) {
     shortestDistance = -1;
 }
 console.log("Length of \"",testCaseToUse,"\"is",testCaseLength);
