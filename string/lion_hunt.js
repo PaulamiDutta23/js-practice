@@ -1,9 +1,9 @@
-const testCase1 = "L";
+const testCase1 = "Z";
 const testCase2 = "L L";
 const testCase3 = "L  ";
-const testCase4 = "  L ";
-const testCase5 = "    L";
-const testCaseToUse = testCase5;
+const testCase4 = "  Z ";
+const testCase5 = "   Z ";
+const testCaseToUse = testCase1;
 const testCaseLength = testCaseToUse.length;
 let countOfL = 0;
 let countOfZ = 0;
@@ -20,7 +20,16 @@ for(let index = 0; index < testCaseLength; index++) {
         countOfSpace++;
     }
 }
-console.log(testCaseLength);
-console.log(countOfL);
-console.log(countOfZ);
-console.log(countOfSpace);
+
+let shortestDistance = 0;
+const isNoZ = (countOfL + countOfSpace) === testCaseLength;
+const isNoL = (countOfZ + countOfSpace) === testCaseLength;
+
+if(isNoZ || isNoL) {
+    shortestDistance = -1;
+}
+console.log("Length of \"",testCaseToUse,"\"is",testCaseLength);
+console.log("No of L =",countOfL);
+console.log("No of Z =",countOfZ);
+console.log("No of Space =",countOfSpace);
+console.log("Shortest distance between L and Z =",shortestDistance);
