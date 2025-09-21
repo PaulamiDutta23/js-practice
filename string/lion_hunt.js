@@ -1,19 +1,25 @@
-const testCase1 = "Z";
+const testCase1 = "ZZ";
 const testCase2 = "L L";
 const testCase3 = "L  ";
-const testCase4 = "  Z ";
-const testCase5 = "LZ";
-const testCaseToUse = testCase5;
+const testCase4 = "LZ";
+const testCase5 = "L   Z";
+const testCaseToUse = testCase2;
 const testCaseLength = testCaseToUse.length;
 let countOfL = 0;
 let countOfZ = 0;
 let countOfSpace = 0;
 let shortestDistance;
+let count = 0;
 for(let index = 0; index < testCaseLength; index++) {
     if(testCaseToUse[index] === "L" || testCaseToUse[index] === "Z") {
         if(testCaseToUse[index+1] === "L" || testCaseToUse[index+1] === "Z") {
             shortestDistance = 0;
         }
+    }
+    else if(testCaseToUse[index] === " ") {
+            count++;
+            shortestDistance = count;
+            
     }
 }
 
