@@ -22,6 +22,15 @@ function hasSystemWon(moveCombination) {
   }
 }
 
+function displayFinalResult(points) {
+  console.log("!!! Game Over !!!");
+
+  if (points[0] > points[1]) {
+    return console.log("\n\n🏆 You rocked it !!!");
+  }
+  return console.log("\n\n😔 Better Luck Next Time !!!");
+}
+
 function displayResult(systemMoveNumber, userMoveNumber, userPoint, systemPoint) {
   const message = `User's point :${userPoint}\nSystem's point :${systemPoint}
   \nUser's move :${ELEMENTS[userMoveNumber]}\t\tSystem's move :${ELEMENTS[systemMoveNumber]}\n`;
@@ -46,15 +55,6 @@ function playGame(systemMoveNumber, userMoveNumber, points) {
   return [userPoint, systemPoint];
 }
 
-function displayFinalResult(points) {
-  console.log("!!! Game Over !!!");
-
-  if (points[0] > points[1]) {
-    return console.log("\n\n🏆 You rocked it !!!");
-  }
-  return console.log("\n\n😔 Better Luck Next Time !!!");
-}
-
 function startGame(points) {
   if (points[0] === 3 || points[1] === 3) {
     return displayFinalResult(points);
@@ -65,9 +65,18 @@ function startGame(points) {
   return startGame(points);
 }
 
+function playAgain() {
+  const decision = confirm("\nDo you want to play again?");
+  return decision;
+}
+
 function main() {
   const points = [0, 0];
   startGame(points);
+
+  while (playAgain()) {
+    startGame(points);
+  }
 }
 
 main();
