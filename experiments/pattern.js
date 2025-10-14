@@ -1,21 +1,29 @@
-function generateChar(r, c, char = "*-") {
-  const isEqual = r === c;
-  return isEqual ? char[0] : char[1];
+function generateChar(r, c, rowCols, pattern, char = "*-") {
+  const patternType = ["left diagonal", "right diagonal", "both diagonals"];
+  const isEqualRowCol = r === c;
+  const rightDiagonal = r + c === rowCols - 1;
+  switch (pattern) {
+    case patternType[0]:
+      return isEqualRowCol ? char[0] : char[1];
+    case patternType[1]:
+      return rightDiagonal ? char[0] : char[1];
+    case patternType[2]:
+      return isEqualRowCol || rightDiagonal ? char[0] : char[1];
+  }
 }
 
-function generateRow(r, cols) {
+function generateRow(r, rowCols, pattern) {
   let row = "";
-  for (let c = 1; c <= cols; c++) {
-    row += generateChar(r, c);
+  for (let c = 0; c < rowCols; c++) {
+    row += generateChar(r, c, rowCols, pattern);
   }
-
   return row;
 }
 
-function generatePattern(rows, cols) {
+function generatePattern(rowCols, pattern) {
   const lines = [];
-  for (let r = 1; r <= rows; r++) {
-    const line = generateRow(r, cols);
+  for (let r = 0; r < rowCols; r++) {
+    const line = generateRow(r, rowCols, pattern);
     lines.push(line);
   }
 
@@ -23,10 +31,14 @@ function generatePattern(rows, cols) {
 }
 
 function createDifferentPatterns() {
-  const row = +prompt("Enter row number :");
-  const column = +prompt("Enter column number :");
-  const pattern = generatePattern(row, column);
-  console.log(pattern);
+  console.log(`You have options for pattern type :
+    -> left diagonal
+    -> right diagonal
+    -> both diagonals`);
+  const rowColumn = +prompt("Enter row & column number :");
+  const pattern = prompt("Enter the type of pattern you want :")
+  const createdPattern = generatePattern(rowColumn, pattern);
+  console.log(createdPattern);
 }
 
 createDifferentPatterns();
