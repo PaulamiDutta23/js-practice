@@ -42,7 +42,7 @@ function chooseOperation(firstNumber, secondNumber, operationIndex) {
 }
 
 function startCalculation() {
-  const firstNumber = +prompt("Enter the first number :");
+  const firstNumber = +prompt("\nEnter the first number :");
   const secondNumber = +prompt("Enter the second number :");
   const operation = prompt("Enter the operation :");
   const operationIndex = OPERATION_ARRAY.indexOf(operation);
@@ -54,7 +54,24 @@ function calculateAgain() {
   const decision = confirm("\nDo you want to calculate again?");
   return decision;
 }
+
+function showDisclaimer() {
+  const introductionMessage = `
+  😁 CALCULATOR 😁\n
+  🤗 Read the instructions 🤗\n\n
+  👉 Enter 2 numbers
+  👉 Enter the operation as follows ->
+     + : Addition
+     - : Subtracttion
+     * : Multiplication
+     / : Division
+     % : Remainder
+     ** : Exponent`;
+  console.log(introductionMessage);
+}
+
 function main() {
+  showDisclaimer();
   startCalculation();
 
   while (calculateAgain()) {
