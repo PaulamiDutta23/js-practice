@@ -1,4 +1,4 @@
-const ELEMENTS = ["🗿", "📜", "✄"];
+const ELEMENTS = ["🪨", "📜", "✂️"];
 
 function hasUserWon(moveCombination) {
   switch (moveCombination) {
