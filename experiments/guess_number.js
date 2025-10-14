@@ -35,7 +35,19 @@ function playAgain() {
   return decision;
 }
 
+function showDisclaimer() {
+  const introductionMessage = `
+  😁 GAME : GUESS THE NUMBER 😁\n
+  🤗 Read the instructions 🤗\n\n
+  👉 The System will generate a secrert number
+  👉 You have to guess the number
+  👉 You can ask for as many moves as you want
+  👉 If your guessed number is greater than the secret number, you will get an indication`;
+  console.log(introductionMessage);
+}
+
 function main() {
+  showDisclaimer();
   startGame();
 
   while (playAgain()) {
