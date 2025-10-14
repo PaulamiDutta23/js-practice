@@ -55,12 +55,28 @@ function playGame(systemMoveNumber, userMoveNumber, points) {
   return [userPoint, systemPoint];
 }
 
+function showDisclaimer() {
+  const introductionMessage = `
+  😁 GAME : STONE-PAPER-SCISSOR 😁\n
+  🤗 Read the instructions 🤗\n\n
+  👉 This game is against System
+  👉 There are 3 elements : Rock, Paper, Scissor\n
+     Enter your move as follows ->
+     0 : Rock
+     1 : Paper
+     2 : Scissor
+  👉 Your goal is to get 3 points
+  👉 If system gets 3 points it will win, otherwise you will win`;
+  console.log(introductionMessage);
+}
+
 function startGame(points) {
   if (points[0] === 3 || points[1] === 3) {
     return displayFinalResult(points);
   }
+
   const systemMoveNumber = Math.floor(ELEMENTS.length * Math.random());
-  const userMoveNumber = +prompt("Enter your move :");
+  const userMoveNumber = +prompt("\nEnter your move :");
   points = playGame(systemMoveNumber, userMoveNumber, points);
   return startGame(points);
 }
@@ -71,6 +87,7 @@ function playAgain() {
 }
 
 function main() {
+  showDisclaimer();
   const points = [0, 0];
   startGame(points);
 
