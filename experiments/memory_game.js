@@ -91,7 +91,28 @@ function startGame() {
   }
 }
 
+function showDisclaimer() {
+  const introductionMessage = `
+  ${formatText(GREEN, "😁 GAME : MEMORY GAME 😁")}\n
+  ${formatText(YELLOW, "🤗 General information for game 🤗")}\n\n
+  👉 There are 5 types of word : 
+     -> animal
+     -> colour
+     -> country
+     -> flower
+     -> fruit
+  👉 New words will be generated in each round based on the chosen type
+  👉 You have to enter all the words in each round in sequence
+  👉 If you enter wrong sequence the game will over !!!\n\n\n
+  ${formatText(CYAN, "🤗 Instructions to play the game 🤗")}\n\n
+  👉 Enter the type of words you want
+  👉 See the new word in each round and remember that
+  👉 Enter the words from beginning in each round (seperated by space) & press enter`;
+  console.log(introductionMessage);
+}
+
 function main() {
+  showDisclaimer();
   startGame();
 }
 
