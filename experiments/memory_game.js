@@ -1,6 +1,18 @@
 const FRUIT_WORDS = ["fig", "melon", "nut", "kiwi", "plum", "pear", "date",
   "lime", "litchi", "apple", "mango", "grape", "guava", "lemon", "berry", "olive",
   "papaya", "banana", "raisin", "peach"];
+const FLOWER_WORDS = ["rose", "lily", "pansy", "iris", "bluebell", "tulip", "daisy",
+  "lotus", "lilac", "zinnia", "aster", "orchid", "jasmine", "beli", "sunflower", "marigold",
+  "hibiscus", "datura", "peony", "viola"];
+const COLOUR_WORDS = ["red", "blue", "green", "yellow", "pink", "purple", "orange",
+  "brown", "black", "white", "grey", "violet", "indigo", "maroon", "beige", "cyan",
+  "magenta", "gold", "silver", "teal"];
+const ANIMAL_WORDS = ["dog", "cat", "cow", "pig", "rat", "ant", "bat", "fox", "bear",
+  "lion", "tiger", "horse", "sheep", "whale", "zebra", "panda", "snake", "camel", "goose",
+  "duck"];
+const COUNTRY_WORDS = ["india", "china", "france", "brazil", "cannada", "russia", "mexico", "egypt",
+  "turkey", "germany", "nigeria", "norway", "sweden", "denmark", "poland", "finland", "belgium",
+  "portugal", "ireland", "japan"];
 const RED = "\x1B[31m";
 const GREEN = "\x1B[32m";
 const YELLOW = "\x1B[33m";
@@ -21,9 +33,9 @@ function displayFinalMessage(point, systemGeneratedString, userString) {
   console.log(finalMessage);
 }
 
-function generateCuurentWord() {
-  const currentWordIndex = Math.floor(Math.random() * FRUIT_WORDS.length);
-  return FRUIT_WORDS[currentWordIndex];
+function generateCuurentWord(typeOfWords) {
+  const currentWordIndex = Math.floor(Math.random() * typeOfWords.length);
+  return typeOfWords[currentWordIndex];
 }
 
 function generateMessage(round, currentWord) {
@@ -36,8 +48,8 @@ function isNotEqual(systemGeneratedString, memoryString) {
   return systemGeneratedString !== memoryString;
 }
 
-function playGame(systemGeneratedWords, round) {
-  const currentWord = generateCuurentWord();
+function playGame(systemGeneratedWords, round, typeOfWords) {
+  const currentWord = generateCuurentWord(typeOfWords);
   systemGeneratedWords.push(currentWord);
   const systemGeneratedString = systemGeneratedWords.join(" ");
   console.log(generateMessage(round, currentWord));
@@ -51,13 +63,30 @@ function playGame(systemGeneratedWords, round) {
   return isNotEqual(systemGeneratedString, userString);
 }
 
+function chooseType(typeOfWords) {
+  switch (typeOfWords) {
+    case "fruit":
+      return FRUIT_WORDS;
+    case "flower":
+      return FLOWER_WORDS;
+    case "colour":
+      return COLOUR_WORDS;
+    case "animal":
+      return ANIMAL_WORDS;
+    case "country":
+      return COUNTRY_WORDS;
+  }
+}
+
 function startGame() {
   const systemGeneratedWords = [];
+  const typeOfWords = prompt("Enter the type of words you want :");
+  const chosenType = chooseType(typeOfWords);
   let round = 1;
   let isLose = false;
 
   while (!isLose) {
-    isLose = playGame(systemGeneratedWords, round);
+    isLose = playGame(systemGeneratedWords, round, chosenType);
     round++;
   }
 }
