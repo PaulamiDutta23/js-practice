@@ -1,5 +1,16 @@
+function encodeNumber(data) {
+  return "i".concat(data).concat("e");
+}
+
+function encodeData(dataType, data) {
+  switch (dataType) {
+    case "number": return encodeNumber(data);
+  }
+}
+
 function bencodeEncoder(data) {
-  return "i123e";
+  const dataType = typeof data;
+  return encodeData(dataType, data);
 }
 
 function formatText(input, expectedValue, actualValue) {
@@ -13,7 +24,7 @@ function formatText(input, expectedValue, actualValue) {
 function composeMessage(header, input, expectedValue, actualValue) {
   console.log(header);
 
-  if(expectedValue !== actualValue) {
+  if (expectedValue !== actualValue) {
     console.log(formatText(input, expectedValue, actualValue));
   }
 }
@@ -35,6 +46,7 @@ function dashes(text) {
 function testIntegers() {
   console.log(dashes("\nIntegers"));
   testBencodeEncoder("positive number", 123, "i123e");
+  testBencodeEncoder("negative number", -123, "i-123e");
 }
 
 function testAllBencodeEncoder() {
