@@ -1,15 +1,28 @@
+function encodeNumber(data) {
+  return "i".concat(data).concat("e");
+}
+
 function encodeString(data) {
   return "".concat(data.length).concat(":").concat(data);
 }
 
-function encodeNumber(data) {
-  return "i".concat(data).concat("e");
+function encodeList(data) {
+  let encodedString = "l";
+
+  for (let index = 0; index < data.length; index++) {
+    const encodedElement = bencodeEncoder(data[index]);
+    encodedString = encodedString + encodedElement;
+  }
+
+  encodedString = encodedString + "e";
+  return encodedString;
 }
 
 function encodeData(dataType, data) {
   switch (dataType) {
     case "number": return encodeNumber(data);
     case "string": return encodeString(data);
+    case "object": return encodeList(data);
   }
 }
 
@@ -48,12 +61,6 @@ function dashes(text) {
   return `${text}\n${"-".repeat(text.length)}\n`;
 }
 
-function testStrings() {
-  console.log(dashes("\nStrings"));
-  testBencodeEncoder("normal string", "hi", "2:hi");
-  testBencodeEncoder("empty string", "", "0:");
-}
-
 function testIntegers() {
   console.log(dashes("\nIntegers"));
   testBencodeEncoder("positive number", 123, "i123e");
@@ -61,10 +68,26 @@ function testIntegers() {
   testBencodeEncoder("zero", 0, "i0e");
 }
 
+function testStrings() {
+  console.log(dashes("\nStrings"));
+  testBencodeEncoder("normal string", "hi", "2:hi");
+  testBencodeEncoder("empty string", "", "0:");
+}
+
+function testLists() {
+  console.log(dashes("\nLists"));
+  testBencodeEncoder("normal list", [1, "hi"], "li1e2:hie");
+  testBencodeEncoder("empty list", [], "le");
+  testBencodeEncoder("nested list", [1, "hi", ["the", 123]], "li1e2:hil3:thei123eee");
+  testBencodeEncoder("nested list in mid", [1, "hi", ["the", 123], 56], "li1e2:hil3:thei123eei56ee");
+  testBencodeEncoder("nested list at beg", [["the", 123], 1, "hi", 56], "ll3:thei123eei1e2:hii56ee");
+}
+
 function testAllBencodeEncoder() {
   console.log(dashes("Bencode Encoder"));
   testIntegers();
   testStrings();
+  testLists();
 }
 
 testAllBencodeEncoder();
