@@ -1,27 +1,23 @@
-function encodeNumber(data) {
-  return "i".concat(data).concat("e");
-}
-
-function encodeString(data) {
-  return "".concat(data.length).concat(":").concat(data);
+function formatEncodedData(start, middle, end) {
+  return `${start}${middle}${end}`;
 }
 
 function encodeList(data) {
-  let encodedString = "l";
+  const encodedArray = [];
 
   for (let index = 0; index < data.length; index++) {
     const encodedElement = bencodeEncoder(data[index]);
-    encodedString = encodedString + encodedElement;
+    encodedArray.push(encodedElement);
   }
 
-  encodedString = encodedString + "e";
-  return encodedString;
+  const encodedString = encodedArray.join("");
+  return formatEncodedData("l", encodedString, "e");
 }
 
 function encodeData(dataType, data) {
   switch (dataType) {
-    case "number": return encodeNumber(data);
-    case "string": return encodeString(data);
+    case "number": return formatEncodedData("i", data, "e");
+    case "string": return formatEncodedData(data.length, ":", data);
     case "object": return encodeList(data);
   }
 }
